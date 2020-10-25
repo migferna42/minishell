@@ -42,10 +42,8 @@ static size_t		ft_count_words(char const *s, char c)
 static	char		*ft_get_word(char const *s, char c)
 {
 	size_t	j;
-	size_t	k;
 	char	*word;
 
-	k = 0;
 	j = 0;
 	while (s[j] != c && s[j])
 		j++;
