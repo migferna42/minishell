@@ -74,27 +74,43 @@ static void		run_commands(t_shell *shell)
 	}
 }
 
-static void		minishell(t_shell *shell)
+static void   exit_shell(t_shell *shell, char *line)
+{
+	ft_putendl_fd("exit", 1);
+	clean_shell(shell);
+	free(line);
+	exit(0);
+}
+
+static char   *read_input(t_shell *shell)
 {
 	char	*line;
+  char *readen;
+
+  readen = NULL;
+  while (!get_next_line(&line))
+  {
+    readen = ft_strjoin_noleak(readen, line, 1, 1);
+	  if (!ft_strlen(readen))
+      exit_shell(shell, readen);
+  }
+  return (readen);
+}
+
+static void		minishell(t_shell *shell)
+{
+  char *input;
 
 	signal(SIGQUIT, signal_handler_running);
 	while (1)
 	{
-		line = NULL;
 		signal(SIGINT, signal_handler_running);
 		ft_putstr_fd("$:\\>", 1);
-		if (get_next_line(&line) == 0)
-		{
-			ft_putendl_fd("exit", 1);
-			clean_shell(shell);
-			free(line);
-			exit(0);
-		}
-		shell->commands = ft_split(line, ';');
-		free(line);
+    input = read_input(shell);
+		shell->commands = ft_split(input, ';');
 		run_commands(shell);
 		clean_commands(shell);
+		free(input);
 	}
 }
 
