@@ -55,6 +55,8 @@ char	**get_args(char *input);
 char	*get_env(char **env, char *arg);
 char	*search_binary(char *binary, char **paths);
 int		get_next_line(char **line);
+char	*ft_strjoin_noleak(char *str1, char *str2,
+      short free_first, short free_second);
 
 /*
 ** Parsing functions

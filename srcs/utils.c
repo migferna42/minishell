@@ -69,3 +69,27 @@ char	**add_env(char **variable, char **env, int n)
 		tmp_envp[i + 1] = NULL;
 	return (tmp_envp);
 }
+
+char	*ft_strjoin_noleak(char *str1, char *str2, short free_first, short free_second)
+{
+	char	*tmp;
+
+  if (!str1)
+  {
+    if (!(str1 = malloc(sizeof(char))))
+      return(NULL);
+    *str1 = '\0';
+  }
+  if (!str2)
+  {
+    if (!(str2 = malloc(sizeof(char))))
+      return(NULL);
+    *str2 = '\0';
+  }
+	tmp = ft_strjoin(str1, str2);
+	if (free_first)
+		free(str1);
+	if (free_second)
+		free(str2);
+	return (tmp);
+}
