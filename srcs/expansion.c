@@ -87,3 +87,4 @@ void			expansion(t_shell *shell)
 		j++;
 	}
 }
+

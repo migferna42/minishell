@@ -85,28 +85,28 @@ static void   exit_shell(t_shell *shell, char *line)
 static char   *read_input(t_shell *shell)
 {
 	char	*line;
-  char *readen;
+	char *readen;
 
-  readen = NULL;
-  while (!get_next_line(&line))
-  {
-    readen = ft_strjoin_noleak(readen, line, 1, 1);
-	  if (!ft_strlen(readen))
-      exit_shell(shell, readen);
-  }
-  return (readen);
+	readen = NULL;
+	while (!get_next_line(&line))
+	{
+		readen = ft_strjoin_noleak(readen, line, 1, 1);
+			if (!ft_strlen(readen))
+				exit_shell(shell, readen);
+	}
+	return (readen);
 }
 
 static void		minishell(t_shell *shell)
 {
-  char *input;
+	char *input;
 
 	signal(SIGQUIT, signal_handler_running);
 	while (1)
 	{
 		signal(SIGINT, signal_handler_running);
 		ft_putstr_fd("$:\\>", 1);
-    input = read_input(shell);
+    	input = read_input(shell);
 		shell->commands = ft_split(input, ';');
 		run_commands(shell);
 		clean_commands(shell);
