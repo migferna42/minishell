@@ -6,7 +6,7 @@
 /*   By: migferna <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 10:58:41 by migferna          #+#    #+#             */
-/*   Updated: 2021/02/22 22:31:42 by migferna         ###   ########.fr       */
+/*   Updated: 2021/02/23 17:02:34 by migferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,8 @@ int		ft_cd(t_shell *shell)
 int		is_symbolic_link(char *path)
 {
 	struct stat buf;
-	int			x;
 
-	x = lstat(path, &buf);
+	lstat(path, &buf);
 	return (S_ISLNK(buf.st_mode));
 }
 

@@ -6,7 +6,7 @@
 /*   By: migferna <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 10:18:23 by migferna          #+#    #+#             */
-/*   Updated: 2021/02/23 16:54:13 by migferna         ###   ########.fr       */
+/*   Updated: 2021/02/23 17:18:42 by migferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ static void		read_input(char *line, t_shell *shell)
 			else
 				shell->stat_loc = 2;
 		}
+		clean_matrix(shell->instructions);
+		free(shell->instructions);
 	}
 }
 
