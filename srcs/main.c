@@ -6,7 +6,7 @@
 /*   By: migferna <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 10:18:23 by migferna          #+#    #+#             */
-/*   Updated: 2021/02/22 16:15:45 by migferna         ###   ########.fr       */
+/*   Updated: 2021/02/23 16:54:13 by migferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,23 +20,32 @@ static void		read_input(char *line, t_shell *shell)
 	while (1)
 	{
 		signal(SIGINT, signal_handler_running);
-		ft_putstr_fd("$:\\>", 1);
+		if (!line)
+			ft_putstr_fd("$:\\>", 1);
 		if (get_next_line(&line) == 0)
 		{
-			ft_putendl_fd("exit", 1);
-			clean_env(shell);
-			free(line);
-			exit(0);
-		}
-		tmp = parse_input(line);
-		free(line);
-		if (tmp)
-		{
-			line = tmp;
-			minishell(line, shell);
+			if (!line)
+			{
+				ft_putendl_fd("exit", 1);
+				clean_env(shell);
+				free(line);
+				exit(0);
+			}
+			else
+				ft_putstr_fd("\033[J", 1);
 		}
 		else
-			shell->stat_loc = 2;
+		{
+			tmp = parse_input(line);
+			free(line);
+			if (tmp)
+			{
+				line = tmp;
+				minishell(line, shell);
+			}
+			else
+				shell->stat_loc = 2;
+		}
 	}
 }
 
